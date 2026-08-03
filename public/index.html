@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Download any public video, audio or image from YouTube, Instagram, Facebook, TikTok, SoundCloud, Pinterest and 1000+ sites in highest quality — 4K, 320kbps MP3 and more." />
+  <meta property="og:title" content="MediaSnap — Universal Media Downloader" />
+  <meta property="og:description" content="Download from 1000+ sites in highest quality. 4K video, 320kbps MP3, original images." />
+  <title>MediaSnap — Universal Media Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <!-- Grid overlay -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="17" stroke="url(#lg1)" stroke-width="2"/>
+          <path d="M12 18L18 24L24 18" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 10V24" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="lg1" x1="1" y1="1" x2="35" y2="35" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a855f7"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="lg2" x1="12" y1="10" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a855f7"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Media<span class="logo-accent">Snap</span></span>
+      </div>
+      <nav class="header-nav">
+        <a href="#supported" class="nav-link">Platforms</a>
+        <a href="#history" class="nav-link">History</a>
+      </nav>
+    </header>
+
+    <!-- ── Hero ───────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        1000+ Supported Platforms
+      </div>
+      <h1 class="hero-title">
+        Download <span class="gradient-text">Anything</span><br/>
+        From Anywhere
+      </h1>
+      <p class="hero-subtitle">
+        Paste any public URL — YouTube, Instagram, TikTok, SoundCloud, Pinterest, Facebook & more.<br/>
+        Get the highest quality: <strong>4K video</strong>, <strong>320kbps MP3</strong>, original images.
+      </p>
+
+      <!-- URL Input Card -->
+      <div class="input-card glass-card">
+        <div class="input-wrapper" id="input-wrapper">
+          <div class="input-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <input
+            id="url-input"
+            type="url"
+            placeholder="Paste URL here — YouTube, Instagram, TikTok, SoundCloud..."
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Media URL to download"
+          />
+          <button id="paste-btn" class="paste-btn" title="Paste from clipboard" aria-label="Paste URL from clipboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="2" width="6" height="4" rx="1"/><path d="M17 4h2a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+            </svg>
+            Paste
+          </button>
+          <button id="fetch-btn" class="fetch-btn" aria-label="Fetch media info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
+            </svg>
+            Fetch
+          </button>
+        </div>
+
+        <!-- Detected platform badge -->
+        <div id="platform-badge" class="platform-badge hidden" aria-live="polite"></div>
+      </div>
+
+      <!-- Error message -->
+      <div id="error-msg" class="error-msg hidden" role="alert" aria-live="assertive"></div>
+    </section>
+
+    <!-- ── Media Info Card ─────────────────────────────────── -->
+    <section id="media-section" class="media-section hidden" aria-label="Media information and download options">
+
+      <!-- Loading skeleton -->
+      <div id="loading-state" class="loading-state glass-card hidden">
+        <div class="spinner" aria-label="Loading…"></div>
+        <p class="loading-text">Fetching media info…</p>
+      </div>
+
+      <!-- Media info result -->
+      <div id="media-result" class="media-result glass-card hidden">
+        <div class="media-header">
+          <div class="media-thumb-wrap">
+            <img id="media-thumb" src="" alt="Media thumbnail" class="media-thumb" loading="lazy" />
+            <div id="media-duration" class="media-duration"></div>
+          </div>
+          <div class="media-meta">
+            <div id="media-site" class="media-site-badge"></div>
+            <h2 id="media-title" class="media-title"></h2>
+            <p id="media-uploader" class="media-uploader"></p>
+          </div>
+        </div>
+
+        <!-- Format grid -->
+        <div class="formats-label">Choose Format</div>
+        <div id="formats-grid" class="formats-grid" role="group" aria-label="Download format options"></div>
+
+        <!-- Download progress -->
+        <div id="progress-wrap" class="progress-wrap hidden">
+          <div class="progress-info">
+            <span id="progress-label" class="progress-label">Preparing…</span>
+            <span id="progress-pct" class="progress-pct">0%</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="progress-speed" id="progress-speed"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Supported Platforms ────────────────────────────── -->
+    <section id="supported" class="platforms-section" aria-label="Supported platforms">
+      <h2 class="section-title">Supported Platforms</h2>
+      <p class="section-sub">And 1000+ more via yt-dlp's ever-growing list</p>
+      <div class="platforms-grid">
+        <div class="platform-pill">▶ YouTube</div>
+        <div class="platform-pill">📸 Instagram</div>
+        <div class="platform-pill">🎵 TikTok</div>
+        <div class="platform-pill">🎧 SoundCloud</div>
+        <div class="platform-pill">📌 Pinterest</div>
+        <div class="platform-pill">🎬 Facebook</div>
+        <div class="platform-pill">🐦 Twitter / X</div>
+        <div class="platform-pill">🎞 Vimeo</div>
+        <div class="platform-pill">📺 Dailymotion</div>
+        <div class="platform-pill">🎮 Twitch</div>
+        <div class="platform-pill">🎶 Spotify*</div>
+        <div class="platform-pill">💬 Reddit</div>
+        <div class="platform-pill">🎬 Bilibili</div>
+        <div class="platform-pill">📻 Mixcloud</div>
+        <div class="platform-pill">🌐 + 1000 more</div>
+      </div>
+      <p class="platform-note">*Spotify: metadata + preview clips (full tracks require premium and are DRM-protected)</p>
+    </section>
+
+    <!-- ── Download History ───────────────────────────────── -->
+    <section id="history" class="history-section" aria-label="Download history">
+      <h2 class="section-title">Session History</h2>
+      <div id="history-list" class="history-list">
+        <p class="history-empty">Your downloads will appear here</p>
+      </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <p class="footer-disclaimer">
+        ⚠️ <strong>Legal Notice:</strong> Only download publicly accessible content you have the right to download. Respect copyright and platform Terms of Service.
+      </p>
+      <p class="footer-copy">Powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer">yt-dlp</a> &amp; <strong>ffmpeg</strong> · Built with ❤️ by MediaSnap</p>
+    </footer>
+
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>

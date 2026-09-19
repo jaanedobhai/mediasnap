@@ -48,6 +48,7 @@ app.get('/api/info', async (req, res) => {
     '--dump-json',
     '--no-playlist',
     '--no-warnings',
+    '--extractor-args', 'youtube:player_client=default,ios',
     '--socket-timeout', '30',
     url,
   ];
@@ -192,6 +193,12 @@ app.get('/api/download', (req, res) => {
   let filename;
   let contentType;
 
+  const commonFlags = [
+    '--no-playlist',
+    '--no-warnings',
+    '--extractor-args', 'youtube:player_client=default,ios',
+  ];
+
   if (formatId === 'audio_mp3') {
     filename = `${safeTitle}.mp3`;
     contentType = 'audio/mpeg';
@@ -200,8 +207,7 @@ app.get('/api/download', (req, res) => {
       '--extract-audio',
       '--audio-format', 'mp3',
       '--audio-quality', '0',            // VBR best → 320 kbps
-      '--no-playlist',
-      '--no-warnings',
+      ...commonFlags,
       '-o', '-',                         // output to stdout
       url,
     ];
@@ -210,8 +216,7 @@ app.get('/api/download', (req, res) => {
     contentType = 'audio/mp4';
     args = [
       '-f', 'bestaudio',
-      '--no-playlist',
-      '--no-warnings',
+      ...commonFlags,
       '-o', '-',
       url,
     ];
@@ -225,8 +230,7 @@ app.get('/api/download', (req, res) => {
     args = [
       '-f', fmtSelector,
       '--merge-output-format', 'mp4',
-      '--no-playlist',
-      '--no-warnings',
+      ...commonFlags,
       '-o', '-',
       url,
     ];
@@ -237,8 +241,7 @@ app.get('/api/download', (req, res) => {
     args = [
       '-f', 'bestvideo+bestaudio/best',
       '--merge-output-format', 'mp4',
-      '--no-playlist',
-      '--no-warnings',
+      ...commonFlags,
       '-o', '-',
       url,
     ];

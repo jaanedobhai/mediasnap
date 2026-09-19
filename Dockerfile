@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install yt-dlp via pip into a venv (avoids externally-managed-environment error)
+# Install latest yt-dlp via pip into a venv
 RUN python3 -m venv /opt/ytdlp-venv \
-    && /opt/ytdlp-venv/bin/pip install --no-cache-dir yt-dlp
+    && /opt/ytdlp-venv/bin/pip install --no-cache-dir --upgrade yt-dlp
 
 # Make yt-dlp available globally
 RUN ln -s /opt/ytdlp-venv/bin/yt-dlp /usr/local/bin/yt-dlp

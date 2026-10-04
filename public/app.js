@@ -36,15 +36,16 @@ let downloadHistory = [];
 const PLATFORMS = [
   { regex: /youtu\.be|youtube\.com/i,    label: 'YouTube',     emoji: '▶️' },
   { regex: /instagram\.com/i,            label: 'Instagram',   emoji: '📸' },
+  { regex: /threads\.net/i,              label: 'Threads',     emoji: '🧵' },
   { regex: /tiktok\.com/i,               label: 'TikTok',      emoji: '🎵' },
   { regex: /soundcloud\.com/i,           label: 'SoundCloud',  emoji: '🎧' },
-  { regex: /pinterest\.(com|ca|co)/i,    label: 'Pinterest',   emoji: '📌' },
+  { regex: /pinterest\.(com|ca|co|pin\.it)/i, label: 'Pinterest', emoji: '📌' },
   { regex: /facebook\.com|fb\.watch/i,   label: 'Facebook',    emoji: '🎬' },
   { regex: /twitter\.com|x\.com/i,       label: 'Twitter / X', emoji: '🐦' },
   { regex: /vimeo\.com/i,                label: 'Vimeo',       emoji: '🎞' },
   { regex: /dailymotion\.com/i,          label: 'Dailymotion', emoji: '📺' },
   { regex: /twitch\.tv/i,               label: 'Twitch',      emoji: '🎮' },
-  { regex: /reddit\.com/i,              label: 'Reddit',      emoji: '💬' },
+  { regex: /reddit\.com|redd\.it/i,      label: 'Reddit',      emoji: '💬' },
   { regex: /bilibili\.com/i,            label: 'Bilibili',    emoji: '🎬' },
   { regex: /mixcloud\.com/i,            label: 'Mixcloud',    emoji: '📻' },
 ];

@@ -11,7 +11,25 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve .shortcut with correct MIME type so iOS triggers native install
+app.use((req, res, next) => {
+  if (req.path.endsWith('.shortcut')) {
+    res.type('application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${path.basename(req.path)}"`);
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Dedicated shortcut download route (redundant safety route)
+app.get('/install', (req, res) => {
+  const file = path.join(__dirname, 'public', 'MediaSnap.shortcut');
+  res.setHeader('Content-Type', 'application/octet-stream');
+  res.setHeader('Content-Disposition', 'attachment; filename="MediaSnap.shortcut"');
+  res.sendFile(file);
+});
 
 // ─── Health Check ────────────────────────────────────────────────────────────
 app.get('/api/health', async (req, res) => {

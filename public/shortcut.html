@@ -111,9 +111,10 @@
         <h1 class="hero-title">MediaSnap <span class="gradient-text">iOS Shortcut</span></h1>
         <p class="hero-subtitle">Download any Video, Audio, or Image directly from the iOS Share Sheet on YouTube, Instagram, Reddit, TikTok, Facebook, Twitter, Threads & Pinterest.</p>
         <div style="margin-top:24px;">
-          <a href="/MediaSnap_Downloader.shortcut" class="download-btn" style="text-decoration:none;display:inline-flex;width:auto;padding:16px 32px;font-size:1.1rem;" download>
+          <a href="/MediaSnap.shortcut" class="download-btn" style="text-decoration:none;display:inline-flex;width:auto;padding:16px 32px;font-size:1.1rem;" download>
             📥 1-Tap Add iOS Shortcut to iPhone
           </a>
+          <p style="color:var(--text-2);font-size:0.8rem;margin-top:10px;">Tap on your iPhone → Shortcuts app opens automatically ✦</p>
         </div>
       </div>
 
@@ -149,7 +150,7 @@
         
         <p class="step-desc"><strong>A. Get Contents of URL (Fetch Info):</strong></p>
         <div class="code-box">
-          <span id="url1">https://mediasnap-production-3e80.up.railway.app/api/info?url=[Shortcut Input]</span>
+          <span id="url1">https://mediasnap-eyhq.onrender.com/api/info?url=[Shortcut Input]</span>
           <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('url1').innerText)">Copy</button>
         </div>
 
@@ -162,7 +163,7 @@
 
         <p class="step-desc" style="margin-top:16px;"><strong>C. Get Contents of URL (Stream File Download):</strong></p>
         <div class="code-box">
-          <span id="url2">https://mediasnap-production-3e80.up.railway.app/api/download?url=[Shortcut Input]&formatId=[Selected Format]</span>
+          <span id="url2">https://mediasnap-eyhq.onrender.com/api/download?url=[Shortcut Input]&formatId=[Selected Format]</span>
           <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('url2').innerText)">Copy</button>
         </div>
 

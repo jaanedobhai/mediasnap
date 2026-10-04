@@ -3,186 +3,291 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediaSnap — iOS Share Sheet Shortcut Setup</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>MediaSnap — iOS Shortcut</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .shortcut-container {
-      max-width: 760px;
-      margin: 40px auto;
-      padding: 32px;
-    }
-    .shortcut-header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-    .shortcut-badge {
+    /* Page-specific overrides */
+    .shortcut-page { max-width: 680px; margin: 60px auto; padding: 0 22px 100px; }
+
+    .sc-back {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(168,85,247,0.15);
-      border: 1px solid rgba(168,85,247,0.3);
-      color: var(--purple);
-      padding: 6px 16px;
-      border-radius: 99px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .step-card {
-      background: rgba(0,0,0,0.35);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px; height: 32px;
-      background: var(--grad-main);
-      color: white;
-      font-weight: 800;
-      border-radius: 50%;
-      margin-right: 12px;
-    }
-    .step-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-    }
-    .step-desc {
-      margin-top: 12px;
-      color: var(--text-2);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .code-box {
-      background: rgba(0,0,0,0.6);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--cyan);
-      margin-top: 10px;
-      word-break: break-all;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .copy-btn {
-      background: var(--surface-hov);
-      border: 1px solid var(--border);
-      color: var(--text-1);
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.75rem;
-    }
-    .copy-btn:hover { background: var(--purple); }
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-2);
+      gap: 6px;
+      color: var(--apple-blue);
       text-decoration: none;
       font-size: 0.9rem;
-      margin-bottom: 24px;
+      font-weight: 400;
+      margin-bottom: 40px;
+      transition: opacity 0.2s;
+      letter-spacing: -0.01em;
     }
-    .back-btn:hover { color: var(--purple); }
+    .sc-back:hover { opacity: 0.7; }
+
+    .sc-hero { text-align: center; margin-bottom: 52px; }
+    .sc-eyebrow {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--apple-blue);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .sc-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-1);
+      margin-bottom: 12px;
+      line-height: 1.08;
+    }
+    .sc-sub {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+
+    /* Big CTA */
+    .sc-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--apple-blue);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 12px 26px;
+      border-radius: 99px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(0,113,227,0.3);
+    }
+    .sc-cta:hover { background: #0077ed; transform: scale(1.02); }
+    .sc-cta:active { transform: scale(0.98); }
+    .sc-hint {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-3);
+      margin-top: 10px;
+    }
+
+    /* Step cards */
+    .steps { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
+    }
+    .step-card:hover { box-shadow: var(--shadow-card); }
+
+    /* Connecting line between steps */
+    .steps .step-card + .step-card { border-top-left-radius: 0; border-top-right-radius: 0; border-top: none; margin-top: 0; }
+    .steps .step-card:first-child { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .steps .step-card:not(:first-child):not(:last-child) { border-radius: 0; border-top: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      background: rgba(0,113,227,0.1);
+      color: var(--apple-blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .step-body { flex: 1; min-width: 0; }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.015em;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+    }
+    .step-desc strong { color: var(--text-1); font-weight: 600; }
+
+    /* Code snippet */
+    .code-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-alt);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--apple-blue);
+      word-break: break-all;
+    }
+    .code-row span { flex: 1; }
+    .copy-btn {
+      flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--text-2);
+      font-family: var(--font);
+      font-size: 0.75rem;
+      font-weight: 400;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: -0.005em;
+    }
+    .copy-btn:hover { color: var(--text-1); border-color: var(--border-mid); }
+
+    /* Feature pills */
+    .feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .feature-chip {
+      background: var(--surface-alt);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 0.82rem;
+      color: var(--text-2);
+      font-weight: 400;
+    }
   </style>
 </head>
 <body>
-  <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
-  <div class="bg-grid"></div>
 
-  <div class="page-wrapper">
-    <div class="shortcut-container glass-card">
-      <a href="/" class="back-btn">← Back to MediaSnap</a>
+  <!-- Nav -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="MediaSnap home">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#0071e3"/>
+          <path d="M10 16L16 22L22 16" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 9V22" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Media<span class="logo-accent">Snap</span></span>
+      </a>
+      <nav class="header-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="#supported" class="nav-link">Platforms</a>
+      </nav>
+    </div>
+  </header>
 
-      <div class="shortcut-header">
-        <div class="shortcut-badge">📱 iPhone & iPad Share Sheet Integration</div>
-        <h1 class="hero-title">MediaSnap <span class="gradient-text">iOS Shortcut</span></h1>
-        <p class="hero-subtitle">Download any Video, Audio, or Image directly from the iOS Share Sheet on YouTube, Instagram, Reddit, TikTok, Facebook, Twitter, Threads & Pinterest.</p>
-        <div style="margin-top:24px;">
-          <a href="/MediaSnap.shortcut" class="download-btn" style="text-decoration:none;display:inline-flex;width:auto;padding:16px 32px;font-size:1.1rem;" download>
-            📥 1-Tap Add iOS Shortcut to iPhone
-          </a>
-          <p style="color:var(--text-2);font-size:0.8rem;margin-top:10px;">Tap on your iPhone → Shortcuts app opens automatically ✦</p>
+  <div class="shortcut-page">
+
+    <a href="/" class="sc-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to MediaSnap
+    </a>
+
+    <!-- Hero -->
+    <div class="sc-hero">
+      <span class="sc-eyebrow">iPhone &amp; iPad</span>
+      <h1 class="sc-title">MediaSnap<br/><span class="gradient-text">iOS Shortcut</span></h1>
+      <p class="sc-sub">Download videos, audio and images directly from the iOS Share Sheet — no app switching, no copy-pasting.</p>
+      <a href="/MediaSnap.shortcut" class="sc-cta" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.54c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.6.7-1.13 1.83-.99 2.94 1.07.08 2.15-.54 2.8-1.34z"/></svg>
+        Add to iPhone &amp; Siri
+      </a>
+      <span class="sc-hint">Tap on your iPhone → Shortcuts app opens automatically</span>
+    </div>
+
+    <!-- Steps -->
+    <div class="steps">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Tap the button above on your iPhone</div>
+          <p class="step-desc">The <strong>Shortcuts app</strong> opens automatically and shows an <strong>"Add Shortcut"</strong> prompt. Tap it — you're done. No manual setup needed.</p>
         </div>
       </div>
 
-      <!-- Step 1 -->
       <div class="step-card">
-        <div>
-          <span class="step-number">1</span>
-          <span class="step-title">Open Shortcuts App on iPhone</span>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Open any supported app</div>
+          <p class="step-desc">Open YouTube, Instagram, TikTok, Reddit, X, Pinterest, Facebook or any other app and find a video, audio or image you want.</p>
+          <div class="feature-row">
+            <span class="feature-chip">▶ YouTube</span>
+            <span class="feature-chip">📸 Instagram</span>
+            <span class="feature-chip">🎵 TikTok</span>
+            <span class="feature-chip">💬 Reddit</span>
+            <span class="feature-chip">𝕏 Twitter / X</span>
+            <span class="feature-chip">🎬 Facebook</span>
+            <span class="feature-chip">📌 Pinterest</span>
+            <span class="feature-chip">🧵 Threads</span>
+          </div>
         </div>
-        <p class="step-desc">
-          Open the built-in <strong>Shortcuts</strong> app on your iPhone or iPad, tap <strong>+</strong> in the top right to create a new shortcut, and name it <strong>MediaSnap Downloader</strong>.
-        </p>
       </div>
 
-      <!-- Step 2 -->
       <div class="step-card">
-        <div>
-          <span class="step-number">2</span>
-          <span class="step-title">Enable Share Sheet Access</span>
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tap Share → MediaSnap Downloader</div>
+          <p class="step-desc">Tap the <strong>Share</strong> button (the box-with-arrow icon) → scroll down → tap <strong>MediaSnap Downloader</strong>.</p>
         </div>
-        <p class="step-desc">
-          Tap the <strong>(i) Info icon</strong> at the bottom of the screen and toggle <strong>"Show in Share Sheet"</strong> to ON. Select <em>Receive URLs, Web Pages & Text</em>.
-        </p>
       </div>
 
-      <!-- Step 3 -->
       <div class="step-card">
-        <div>
-          <span class="step-number">3</span>
-          <span class="step-title">Add API Actions</span>
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Choose type and quality</div>
+          <p class="step-desc">A menu appears — pick <strong>🎬 Video</strong>, <strong>🎧 Audio (MP3)</strong> or <strong>🖼️ Image</strong>. For video, choose your quality (Best · 1080p · 720p · 480p · 360p). The file saves to your <strong>Files app</strong> automatically. 🎉</p>
         </div>
-        <p class="step-desc">Add the following actions in order:</p>
-        
-        <p class="step-desc"><strong>A. Get Contents of URL (Fetch Info):</strong></p>
-        <div class="code-box">
-          <span id="url1">https://mediasnap-eyhq.onrender.com/api/info?url=[Shortcut Input]</span>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('url1').innerText)">Copy</button>
-        </div>
-
-        <p class="step-desc" style="margin-top:16px;"><strong>B. Choose from Menu (Select Type & Quality):</strong></p>
-        <ul style="color:var(--text-2);margin-left:24px;margin-top:8px;font-size:0.9rem;line-height:1.7;">
-          <li>🎬 <strong>Video:</strong> Prompt quality selection (4K / 1080p / 720p / Best).</li>
-          <li>🎧 <strong>Audio MP3:</strong> Download 320kbps MP3 track.</li>
-          <li>🖼 <strong>Image:</strong> Download original high-res image/thumbnail.</li>
-        </ul>
-
-        <p class="step-desc" style="margin-top:16px;"><strong>C. Get Contents of URL (Stream File Download):</strong></p>
-        <div class="code-box">
-          <span id="url2">https://mediasnap-eyhq.onrender.com/api/download?url=[Shortcut Input]&formatId=[Selected Format]</span>
-          <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('url2').innerText)">Copy</button>
-        </div>
-
-        <p class="step-desc" style="margin-top:16px;"><strong>D. Save File:</strong></p>
-        <p class="step-desc">Add the <strong>Save File</strong> action to automatically save the downloaded video/audio into your iPhone's <em>Files / Downloads</em> folder or Camera Roll!</p>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="step-card">
-        <div>
-          <span class="step-number">4</span>
-          <span class="step-title">Try it Out Anywhere!</span>
-        </div>
-        <p class="step-desc">
-          Open YouTube, Instagram, Reddit, TikTok, Facebook, Twitter, or Pinterest → tap <strong>Share</strong> → select <strong>MediaSnap Downloader</strong> → choose Video (4K/1080p), Audio, or Image → Done! 🎉
-        </p>
       </div>
 
     </div>
-  </div>
+
+    <!-- Manual setup section -->
+    <div style="margin-top:52px;">
+      <h2 class="section-title" style="font-size:1.4rem;margin-bottom:6px;">Manual API Setup</h2>
+      <p style="font-size:0.875rem;color:var(--text-2);margin-bottom:20px;letter-spacing:-0.01em;">If you prefer to build the shortcut yourself in the Shortcuts app, use these API endpoints.</p>
+
+      <div class="step-card" style="border-radius:var(--r-lg);flex-direction:column;gap:14px;">
+        <div>
+          <div class="step-title" style="margin-bottom:4px;">1. Fetch media info</div>
+          <div class="code-row">
+            <span id="url1">https://mediasnap-eyhq.onrender.com/api/info?url=[Shortcut Input]</span>
+            <button class="copy-btn" onclick="copy('url1',this)">Copy</button>
+          </div>
+        </div>
+        <div>
+          <div class="step-title" style="margin-bottom:4px;">2. Download media</div>
+          <div class="code-row">
+            <span id="url2">https://mediasnap-eyhq.onrender.com/api/download?url=[URL]&amp;formatId=[Format]&amp;title=[Title]</span>
+            <button class="copy-btn" onclick="copy('url2',this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /shortcut-page -->
+
+  <script>
+    function copy(id, btn) {
+      navigator.clipboard.writeText(document.getElementById(id).innerText);
+      const prev = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(() => btn.textContent = prev, 2000);
+    }
+  </script>
 </body>
 </html>

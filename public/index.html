@@ -3,90 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Download any public video, audio or image from YouTube, Instagram, Facebook, TikTok, SoundCloud, Pinterest and 1000+ sites in highest quality — 4K, 320kbps MP3 and more." />
+  <meta name="description" content="Download any public video, audio or image from YouTube, Instagram, TikTok, Reddit, Facebook and 1000+ sites in highest quality." />
   <meta property="og:title" content="MediaSnap — Universal Media Downloader" />
   <meta property="og:description" content="Download from 1000+ sites in highest quality. 4K video, 320kbps MP3, original images." />
   <title>MediaSnap — Universal Media Downloader</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Animated background orbs -->
-  <div class="bg-orbs" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-  </div>
-
-  <!-- Grid overlay -->
-  <div class="bg-grid" aria-hidden="true"></div>
-
-  <div class="page-wrapper">
-
-    <!-- ── Header ─────────────────────────────────────────── -->
-    <header class="site-header">
-      <div class="logo">
-        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="18" cy="18" r="17" stroke="url(#lg1)" stroke-width="2"/>
-          <path d="M12 18L18 24L24 18" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M18 10V24" stroke="url(#lg2)" stroke-width="2.5" stroke-linecap="round"/>
-          <defs>
-            <linearGradient id="lg1" x1="1" y1="1" x2="35" y2="35" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#a855f7"/>
-              <stop offset="1" stop-color="#06b6d4"/>
-            </linearGradient>
-            <linearGradient id="lg2" x1="12" y1="10" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#a855f7"/>
-              <stop offset="1" stop-color="#06b6d4"/>
-            </linearGradient>
-          </defs>
+  <!-- ── Nav ──────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="MediaSnap home">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#0071e3"/>
+          <path d="M10 16L16 22L22 16" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 9V22" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
         <span class="logo-text">Media<span class="logo-accent">Snap</span></span>
-      </div>
-      <nav class="header-nav">
-        <a href="shortcut.html" class="nav-link" style="color:var(--purple);font-weight:700;">📱 iOS Shortcut</a>
+      </a>
+      <nav class="header-nav" aria-label="Site navigation">
+        <a href="shortcut.html" class="nav-link accent">📱 iOS Shortcut</a>
         <a href="#supported" class="nav-link">Platforms</a>
         <a href="#history" class="nav-link">History</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <!-- ── Hero ───────────────────────────────────────────── -->
+  <div class="page-wrapper">
+
+    <!-- ── Hero ─────────────────────────────────────────── -->
     <section class="hero">
-      <div class="hero-badge">
-        <span class="pulse-dot" aria-hidden="true"></span>
-        1000+ Supported Platforms
-      </div>
+      <span class="hero-eyebrow">1000+ Supported Platforms</span>
       <h1 class="hero-title">
-        Download <span class="gradient-text">Anything</span><br/>
-        From Anywhere
+        Download <span class="gradient-text">Anything.</span><br/>Instantly.
       </h1>
       <p class="hero-subtitle">
-        Paste any public URL — YouTube, Instagram, TikTok, SoundCloud, Pinterest, Facebook & more.<br/>
-        Get the highest quality: <strong>4K video</strong>, <strong>320kbps MP3</strong>, original images.
+        Paste any URL — YouTube, Instagram, TikTok, Reddit, Facebook &amp; more.<br/>
+        Get <strong>4K video</strong>, <strong>320kbps MP3</strong>, or original images in one tap.
       </p>
 
-      <!-- Native Apple Shortcut Banner -->
+      <!-- iOS Shortcut banner -->
       <div class="apple-shortcut-card">
         <div class="apple-card-content">
           <div class="apple-badges">
-            <span class="apple-pill"> iOS Share Sheet</span>
-            <span class="apple-pill siri-pill">🎙️ "Hey Siri, MediaSnap"</span>
+            <span class="apple-pill">Share Sheet</span>
+            <span class="apple-pill siri-pill">🎙 Hey Siri, MediaSnap</span>
           </div>
-          <div class="apple-card-title">Download from any App in 1 Tap</div>
-          <div class="apple-card-sub">Share links from YouTube, Instagram, TikTok, Reddit & more directly to MediaSnap.</div>
+          <div class="apple-card-title">Download from any app in 1 tap</div>
+          <div class="apple-card-sub">Use the iOS Share Sheet on YouTube, Instagram, TikTok, Reddit &amp; more — no copy‑pasting needed.</div>
         </div>
         <a href="/MediaSnap.shortcut" class="apple-install-btn" download>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.54c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.6.7-1.13 1.83-.99 2.94 1.07.08 2.15-.54 2.8-1.34z"/></svg>
-          Add to iPhone & Siri
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.54c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.6.7-1.13 1.83-.99 2.94 1.07.08 2.15-.54 2.8-1.34z"/></svg>
+          Add to iPhone &amp; Siri
         </a>
       </div>
 
-      <!-- URL Input Card -->
-      <div class="input-card glass-card">
+      <!-- URL Input -->
+      <div class="input-card">
         <div class="input-wrapper" id="input-wrapper">
           <div class="input-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -96,7 +70,7 @@
           <input
             id="url-input"
             type="url"
-            placeholder="Paste URL here — YouTube, Instagram, TikTok, SoundCloud..."
+            placeholder="Paste a link — YouTube, Instagram, TikTok, Reddit…"
             autocomplete="off"
             spellcheck="false"
             aria-label="Media URL to download"
@@ -114,26 +88,21 @@
             Fetch
           </button>
         </div>
-
-        <!-- Detected platform badge -->
         <div id="platform-badge" class="platform-badge hidden" aria-live="polite"></div>
       </div>
 
-      <!-- Error message -->
+      <!-- Error -->
       <div id="error-msg" class="error-msg hidden" role="alert" aria-live="assertive"></div>
     </section>
 
-    <!-- ── Media Info Card ─────────────────────────────────── -->
+    <!-- ── Media Result ───────────────────────────────────── -->
     <section id="media-section" class="media-section hidden" aria-label="Media information and download options">
-
-      <!-- Loading skeleton -->
-      <div id="loading-state" class="loading-state glass-card hidden">
+      <div id="loading-state" class="loading-state hidden">
         <div class="spinner" aria-label="Loading…"></div>
         <p class="loading-text">Fetching media info…</p>
       </div>
 
-      <!-- Media info result -->
-      <div id="media-result" class="media-result glass-card hidden">
+      <div id="media-result" class="media-result hidden">
         <div class="media-header">
           <div class="media-thumb-wrap">
             <img id="media-thumb" src="" alt="Media thumbnail" class="media-thumb" loading="lazy" />
@@ -146,11 +115,9 @@
           </div>
         </div>
 
-        <!-- Format grid -->
         <div class="formats-label">Choose Format</div>
         <div id="formats-grid" class="formats-grid" role="group" aria-label="Download format options"></div>
 
-        <!-- Download progress -->
         <div id="progress-wrap" class="progress-wrap hidden">
           <div class="progress-info">
             <span id="progress-label" class="progress-label">Preparing…</span>
@@ -164,19 +131,19 @@
       </div>
     </section>
 
-    <!-- ── Supported Platforms ────────────────────────────── -->
+    <!-- ── Supported Platforms ───────────────────────────── -->
     <section id="supported" class="platforms-section" aria-label="Supported platforms">
       <h2 class="section-title">Supported Platforms</h2>
-      <p class="section-sub">And 1000+ more via yt-dlp's ever-growing list</p>
+      <p class="section-sub">And 1000+ more via yt-dlp</p>
       <div class="platforms-grid">
         <div class="platform-pill">▶ YouTube (Up to 4K/8K)</div>
         <div class="platform-pill">📸 Instagram (Reels, Videos, Photos)</div>
         <div class="platform-pill">🧵 Threads</div>
         <div class="platform-pill">🎵 TikTok (No Watermark)</div>
-        <div class="platform-pill">🎧 SoundCloud (320kbps MP3)</div>
-        <div class="platform-pill">📌 Pinterest (Videos & Images)</div>
+        <div class="platform-pill">🎧 SoundCloud (320kbps)</div>
+        <div class="platform-pill">📌 Pinterest (Videos &amp; Images)</div>
         <div class="platform-pill">🎬 Facebook</div>
-        <div class="platform-pill">🐦 Twitter / X</div>
+        <div class="platform-pill">𝕏 Twitter / X</div>
         <div class="platform-pill">💬 Reddit (With Audio)</div>
         <div class="platform-pill">📺 Dailymotion</div>
         <div class="platform-pill">🎞 Vimeo</div>
@@ -184,7 +151,7 @@
         <div class="platform-pill">📻 Mixcloud</div>
         <div class="platform-pill">🌐 + 1000 more</div>
       </div>
-      <p class="platform-note">*Spotify: metadata + preview clips (full tracks require premium and are DRM-protected)</p>
+      <p class="platform-note">*Spotify: metadata + preview clips only (full tracks are DRM-protected)</p>
     </section>
 
     <!-- ── Download History ───────────────────────────────── -->
@@ -195,12 +162,12 @@
       </div>
     </section>
 
-    <!-- ── Footer ─────────────────────────────────────────── -->
+    <!-- ── Footer ────────────────────────────────────────── -->
     <footer class="site-footer">
       <p class="footer-disclaimer">
-        ⚠️ <strong>Legal Notice:</strong> Only download publicly accessible content you have the right to download. Respect copyright and platform Terms of Service.
+        <strong>Legal Notice:</strong> Only download publicly accessible content you have the right to download. Respect copyright and platform Terms of Service.
       </p>
-      <p class="footer-copy">Powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer">yt-dlp</a> &amp; <strong>ffmpeg</strong> · Built with ❤️ by MediaSnap</p>
+      <p class="footer-copy">Powered by <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer">yt-dlp</a> &amp; <strong>ffmpeg</strong> · Built by MediaSnap</p>
     </footer>
 
   </div><!-- /page-wrapper -->

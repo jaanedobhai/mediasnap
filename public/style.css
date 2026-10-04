@@ -621,6 +621,79 @@ body {
 .download-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 .download-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
+/* ── Apple Native Minimal Shortcut Card ─────────────────── */
+.apple-shortcut-card {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: left;
+}
+.apple-card-content { flex: 1; min-width: 0; }
+.apple-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.apple-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-1);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+.apple-pill.siri-pill {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+}
+.apple-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.apple-card-sub {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin-top: 2px;
+}
+.apple-install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: all 0.2s var(--ease-spring);
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.apple-install-btn:hover {
+  transform: translateY(-2px);
+  background: #f1f5f9;
+  box-shadow: 0 6px 20px rgba(255,255,255,0.35);
+}
+@media (max-width: 640px) {
+  .apple-shortcut-card { flex-direction: column; align-items: stretch; text-align: center; }
+  .apple-badges { justify-content: center; }
+  .apple-install-btn { justify-content: center; width: 100%; }
+}
+
 /* Progress */
 .progress-wrap {
   margin-top: 20px;

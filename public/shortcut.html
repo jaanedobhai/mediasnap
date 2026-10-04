@@ -201,12 +201,7 @@
     <div class="sc-hero">
       <span class="sc-eyebrow">iPhone &amp; iPad</span>
       <h1 class="sc-title">MediaSnap<br/><span class="gradient-text">iOS Shortcut</span></h1>
-      <p class="sc-sub">Download videos, audio and images directly from the iOS Share Sheet — no app switching, no copy-pasting.</p>
-      <a href="/MediaSnap.shortcut" class="sc-cta" download>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.54c.66-.8 1.11-1.92.99-3.04-.96.04-2.12.64-2.8 1.44-.6.7-1.13 1.83-.99 2.94 1.07.08 2.15-.54 2.8-1.34z"/></svg>
-        Add to iPhone &amp; Siri
-      </a>
-      <span class="sc-hint">Tap on your iPhone → Shortcuts app opens automatically</span>
+      <p class="sc-sub">To get the perfect native iOS experience without 'Unknown Action' errors, you need to create the shortcut once on your iPhone, then we will use your iCloud link here for 1-click installs!</p>
     </div>
 
     <!-- Steps -->
@@ -215,68 +210,52 @@
       <div class="step-card">
         <div class="step-num">1</div>
         <div class="step-body">
-          <div class="step-title">Tap the button above on your iPhone</div>
-          <p class="step-desc">The <strong>Shortcuts app</strong> opens automatically and shows an <strong>"Add Shortcut"</strong> prompt. Tap it — you're done. No manual setup needed.</p>
+          <div class="step-title">Create a new Shortcut on your iPhone</div>
+          <p class="step-desc">Open the <strong>Shortcuts app</strong>, tap <strong>+</strong>, name it <strong>MediaSnap</strong>, and change the icon to a Film Reel or Play button.</p>
         </div>
       </div>
 
       <div class="step-card">
         <div class="step-num">2</div>
         <div class="step-body">
-          <div class="step-title">Open any supported app</div>
-          <p class="step-desc">Open YouTube, Instagram, TikTok, Reddit, X, Pinterest, Facebook or any other app and find a video, audio or image you want.</p>
-          <div class="feature-row">
-            <span class="feature-chip">▶ YouTube</span>
-            <span class="feature-chip">📸 Instagram</span>
-            <span class="feature-chip">🎵 TikTok</span>
-            <span class="feature-chip">💬 Reddit</span>
-            <span class="feature-chip">𝕏 Twitter / X</span>
-            <span class="feature-chip">🎬 Facebook</span>
-            <span class="feature-chip">📌 Pinterest</span>
-            <span class="feature-chip">🧵 Threads</span>
-          </div>
+          <div class="step-title">Enable Share Sheet</div>
+          <p class="step-desc">Tap the <strong>(i)</strong> info icon at the bottom, turn on <strong>Show in Share Sheet</strong>, and set it to receive <strong>URLs</strong>.</p>
         </div>
       </div>
 
       <div class="step-card">
         <div class="step-num">3</div>
         <div class="step-body">
-          <div class="step-title">Tap Share → MediaSnap Downloader</div>
-          <p class="step-desc">Tap the <strong>Share</strong> button (the box-with-arrow icon) → scroll down → tap <strong>MediaSnap Downloader</strong>.</p>
+          <div class="step-title">Add API Action 1 (Fetch Info)</div>
+          <p class="step-desc">Add a <strong>Get Contents of URL</strong> action and paste this URL (pass the Shortcut Input as the url parameter):</p>
+          <div class="code-row">
+            <span id="url1">https://mediasnap-eyhq.onrender.com/api/info?url=[Shortcut Input]</span>
+            <button class="copy-btn" onclick="copy('url1',this)">Copy</button>
+          </div>
         </div>
       </div>
 
       <div class="step-card">
         <div class="step-num">4</div>
         <div class="step-body">
-          <div class="step-title">Choose type and quality</div>
-          <p class="step-desc">A menu appears — pick <strong>🎬 Video</strong>, <strong>🎧 Audio (MP3)</strong> or <strong>🖼️ Image</strong>. For video, choose your quality (Best · 1080p · 720p · 480p · 360p). The file saves to your <strong>Files app</strong> automatically. 🎉</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Manual setup section -->
-    <div style="margin-top:52px;">
-      <h2 class="section-title" style="font-size:1.4rem;margin-bottom:6px;">Manual API Setup</h2>
-      <p style="font-size:0.875rem;color:var(--text-2);margin-bottom:20px;letter-spacing:-0.01em;">If you prefer to build the shortcut yourself in the Shortcuts app, use these API endpoints.</p>
-
-      <div class="step-card" style="border-radius:var(--r-lg);flex-direction:column;gap:14px;">
-        <div>
-          <div class="step-title" style="margin-bottom:4px;">1. Fetch media info</div>
+          <div class="step-title">Add Menus & Download</div>
+          <p class="step-desc">Add a <strong>Choose from Menu</strong> to pick Video/Audio, then use this download URL for the second <strong>Get Contents of URL</strong> action:</p>
           <div class="code-row">
-            <span id="url1">https://mediasnap-eyhq.onrender.com/api/info?url=[Shortcut Input]</span>
-            <button class="copy-btn" onclick="copy('url1',this)">Copy</button>
-          </div>
-        </div>
-        <div>
-          <div class="step-title" style="margin-bottom:4px;">2. Download media</div>
-          <div class="code-row">
-            <span id="url2">https://mediasnap-eyhq.onrender.com/api/download?url=[URL]&amp;formatId=[Format]&amp;title=[Title]</span>
+            <span id="url2">https://mediasnap-eyhq.onrender.com/api/download?url=[URL]&amp;formatId=[Format]</span>
             <button class="copy-btn" onclick="copy('url2',this)">Copy</button>
           </div>
+          <p class="step-desc" style="margin-top:10px;">Finally, add a <strong>Save File</strong> action.</p>
         </div>
       </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Share the iCloud Link!</div>
+          <p class="step-desc">Once it works perfectly on your phone, tap Share → <strong>Copy iCloud Link</strong>. Send that link to me, and I'll add it to this website for a true 1-click install!</p>
+        </div>
+      </div>
+
     </div>
 
   </div><!-- /shortcut-page -->

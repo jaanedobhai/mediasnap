@@ -252,6 +252,32 @@ app.get('/api/download', (req, res) => {
       '-o', '-',
       url,
     ];
+  } else if (formatId === 'thumbnail' || formatId === 'image') {
+    const infoArgs = [
+      '--dump-json',
+      '--no-playlist',
+      '--no-warnings',
+      '--extractor-args', 'youtube:player_client=default,ios',
+      url,
+    ];
+    const proc = spawn('yt-dlp', infoArgs);
+    let stdout = '';
+    proc.stdout.on('data', d => (stdout += d.toString()));
+    proc.on('close', code => {
+      try {
+        const info = JSON.parse(stdout.trim().split('\n')[0]);
+        if (!info.thumbnail) return res.status(404).json({ error: 'No thumbnail found' });
+        const client = info.thumbnail.startsWith('https') ? https : http;
+        client.get(info.thumbnail, { headers: { 'User-Agent': 'Mozilla/5.0' } }, imgRes => {
+          res.setHeader('Content-Disposition', `attachment; filename="${safeTitle}.jpg"`);
+          res.setHeader('Content-Type', 'image/jpeg');
+          imgRes.pipe(res);
+        });
+      } catch (e) {
+        if (!res.headersSent) res.status(500).json({ error: 'Failed to fetch thumbnail' });
+      }
+    });
+    return;
   } else {
     // fallback: best
     filename = `${safeTitle}.mp4`;
